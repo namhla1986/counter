@@ -1,11 +1,19 @@
-const counters = document.querySelectorAll(".counters");
-const speed = 200;
+const counters = document.querySelectorAll('.counters');
+const speed = 100;
 
 counters.forEach(counter => {
     const updateCount = () => {
-        const target = counter.getAttribute("data-target");
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
 
-        console.log(target);
+        const inc = target / speed;
+
+        if(count < target){
+            counter.innerText = Math.ceil(count + inc);
+            setTimeout(updateCount, 1);
+        } else {
+            count.innerText = target;
+        }
     }
 
     updateCount();
